@@ -28,6 +28,9 @@ public class ParticleSpawnManager : MonoBehaviour
     public GameObject particlePrefab;
     private Particle tempParticle;
     private int temp = 0;
+
+    public PoolManager ballPooler;
+
     private void Start()
     {
         for(int i = 0; i < 10; i++)
@@ -36,8 +39,9 @@ public class ParticleSpawnManager : MonoBehaviour
             {
                 for (int k = 0; k < 10; k++)
                 {
-                    tempGameObject = Instantiate(particlePrefab, new Vector3(i, j, k), Quaternion.identity, this.gameObject.transform);
-
+                    tempGameObject = ballPooler.Withdraw();
+                    tempGameObject.transform.position = new Vector3(i, j + 0.5f, k);
+                    tempGameObject.transform.parent = this.transform;
                     tempParticle = new Particle(tempGameObject);
                     tempParticle.radius = 0.5f;
                     tempParticle.velocity = Vector3.up * 10f;
@@ -57,7 +61,7 @@ public class ParticleSpawnManager : MonoBehaviour
         for (int i = 0; i < particles.Length; i++)
         {
 
-            if(particles[i].position.y < 0 && particles[i].velocity.y < 0)
+            if(particles[i].position.y < 0.5f && particles[i].velocity.y < 0)
                 particles[i].velocity *= -1.0f;
         }
         for (int i = 0; i < particles.Length; i++)
