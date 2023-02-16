@@ -376,6 +376,7 @@ MonoBehaviour:
   grav: {x: -0, y: -9.8, z: -0}
   Simulate: 0
   particlePrefab: {fileID: 6003207164513919463, guid: a86d601df63e9004982b32f218050d96, type: 3}
+  initialParticles: {x: 3, y: 1, z: 3}
   ballPooler: {fileID: 1429614966}
 --- !u!4 &1817744378
 Transform:

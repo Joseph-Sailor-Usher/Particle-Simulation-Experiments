@@ -19,7 +19,7 @@ public struct Particle {
 public class ParticleSpawnManager : MonoBehaviour
 {
     public Vector3 grav;
-    public Particle[] particles = new Particle[1000];
+    public Particle[] particles;
     public bool Simulate = false;
 
     public ParticleSpawnManager() {}
@@ -27,17 +27,19 @@ public class ParticleSpawnManager : MonoBehaviour
     private GameObject tempGameObject;
     public GameObject particlePrefab;
     private Particle tempParticle;
+    public Vector3 initialParticles = Vector3.one;
     private int temp = 0;
 
     public PoolManager ballPooler;
 
     private void Start()
     {
-        for(int i = 0; i < 10; i++)
+        particles = new Particle[(int)(initialParticles.x * initialParticles.y * initialParticles.z)];
+        for(int i = 0; i < initialParticles.x; i++)
         {
-            for (int j = 0; j < 10; j++)
+            for (int j = 0; j < initialParticles.y; j++)
             {
-                for (int k = 0; k < 10; k++)
+                for (int k = 0; k < initialParticles.z; k++)
                 {
                     tempGameObject = ballPooler.Withdraw();
                     tempGameObject.transform.position = new Vector3(i, j + 0.5f, k);
