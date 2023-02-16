@@ -54,23 +54,31 @@ public class ParticleSpawnManager : MonoBehaviour
                 }
             }
         }
+
+        StartCoroutine("PhysicsTick");
+    }
+    private IEnumerator PhysicsTick()
+    {
+        //Bounce when you hit the ground
+        for (int i = 0; i < particles.Length; i++)
+            if(particles[i].position.y < 0.5f && particles[i].velocity.y< 0)
+                particles[i].velocity *= -1.0f;
+
+        UpdateVelocityandPositionForAllParticles();
+
+        yield return new WaitForSeconds(0.01f);
+        StartCoroutine("PhysicsTick");
     }
 
-    private void Update()
+    private void UpdateVelocityandPositionForAllParticles()
     {
         if (Simulate == false) return;
-
+        //Apply gravitational acceleration and update position, and 
         for (int i = 0; i < particles.Length; i++)
         {
-
-            if(particles[i].position.y < 0.5f && particles[i].velocity.y < 0)
-                particles[i].velocity *= -1.0f;
-        }
-        for (int i = 0; i < particles.Length; i++)
-        {
-            Debug.Log(particles[i].position);
-            particles[i].velocity += grav * Time.deltaTime;
-            particles[i].position += particles[i].velocity * Time.deltaTime;
+            //Debug.Log(particles[i].position);
+            particles[i].velocity += grav * 0.01f;
+            particles[i].position += particles[i].velocity * 0.01f;
             particles[i].mySphere.transform.position = particles[i].position;
         }
     }

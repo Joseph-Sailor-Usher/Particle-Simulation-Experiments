@@ -14,7 +14,7 @@ public class ParticleController : MonoBehaviour
     public ParticleController()
     {
         mySphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-        position = 
+        position = Vector3.zero;
         velocity = Vector3.zero;
         radius = 1f;
     }
