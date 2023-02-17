@@ -31,7 +31,7 @@ public class PoolManager : MonoBehaviour
         defaultObjectCount = newSize;
         if (prefabObject == null)
         {
-            Debug.Log("No default object on " + gameObject.name);
+            //Debug.Log("No default object on " + gameObject.name);
             gameObject.SetActive(false);
             return;
         }
